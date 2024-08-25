@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>zootopia laura</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="part1">
+            <div class="logo">
+                <i class="fa fa-ambulance" id="icono" aria-hidden="true"></i>
+                <p>Laura Ramirez</p>
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="overlay">
+            <div class="hero-content">
+                <h1> CLINICA VETERINARIA <br> ZOOTOPIA</h1>
+                <p>Amamos a tu mascota!</p>
+                <button type="button" class="btn btn-primary" id="registrar" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+                <svg
+                  height="32"
+                  width="32"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="empty"
+                >
+                  <path d="M0 0H24V24H0z" fill="none"></path>
+                  <path
+                    d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2zm-3.566 15.604c.881-.556 1.676-1.109 2.42-1.701C18.335 14.533 20 11.943 20 9c0-2.36-1.537-4-3.5-4-1.076 0-2.24.57-3.086 1.414L12 7.828l-1.414-1.414C9.74 5.57 8.576 5 7.5 5 5.56 5 4 6.656 4 9c0 2.944 1.666 5.533 4.645 7.903.745.592 1.54 1.145 2.421 1.7.299.189.595.37.934.572.339-.202.635-.383.934-.571z"
+                  ></path>
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="32"
+                  height="32"
+                  class="filled"
+                >
+                  <path fill="none" d="M0 0H24V24H0z"></path>
+                  <path
+                    d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2z"
+                  ></path>
+                </svg>
+                Agenda tu cita!!
+              </button>
+              <div class="filtro">
+                <label for="filtroEstado">Filtrar citas por estado:</label>
+                <select id="filtroEstado" onchange="filtrarPorEstado()">
+                    <option value="todos">Todos</option>
+                    <option value="abierto">Abierto</option>
+                    <option value="terminada">Terminada</option>
+                    <option value="anulada">Anulada</option>
+                </select>
+            </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div></div>
+        </div>
+    </section>
+        <div class="part2">
+            <h1>Citas Agendadas</h1>
+        </div>
+
+
+        <div id="card_container">
+
+        </div>
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Información para tu cita</h1>
+                        <input type="button" value="" class="btn-close" data-bs-dismiss="modal" aria-label="Close">  
+                    </div>
+                    <div class="modal-body">
+                        <label for="" class="registro">
+                            <p>Nombre Mascota</p>
+                            <input type="text" id="name" placeholder="Nombre..." />
+                            <p>Propietario</p>
+                            <input type="text" id="propietario" placeholder="Propietario..." />
+                            <p>Teléfono</p>
+                            <input type="number" id="telefono" placeholder="Número de teléfono..." />
+                            <p>Tipo de mascota</p>
+                            <select name="tipo de mascota" id="tipo">
+                                <option value="seleccion">Selecciona una opción...</option>
+                                <option value="Perro">Perro</option>
+                                <option value="Gato">Gato</option>
+                                <option value="Ave">Ave</option>
+                                <option value="Conejo">Conejo</option>
+                                <option value="Pez">Pez</option>
+                                <option value="Equino">Equino</option>
+                                <option value="Ovino">Bovino</option>
+                            </select>
+                            <p>Fecha de tu cita</p>
+                            <input type="date" id="fecha">
+                            <p>Hora</p>
+                            <input type="time" name="time" id="time">
+                            <p>Síntomas</p>
+                            <textarea name="sintomas" id="sintomas"></textarea>
+                        </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="guardar" onclick="validar()">Registrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let data = [];
+
+        function enviarConsulta() {
+            let datos = {
+                nombre: document.getElementById("name").value,
+                propietario: document.getElementById("propietario").value,
+                telefono: document.getElementById("telefono").value,
+                tipo: document.getElementById("tipo").value,
+                fecha: document.getElementById("fecha").value,
+                hora: document.getElementById("time").value,
+                sintomas: document.getElementById("sintomas").value,
+                estado: 'abierto'
+            };
+
+            data.push(datos);
+            document.getElementById("name").value = "";
+            document.getElementById("propietario").value = "";
+            document.getElementById("telefono").value = "";
+            document.getElementById("tipo").value = "seleccion";
+            document.getElementById("fecha").value = "";
+            document.getElementById("time").value = "";
+            document.getElementById("sintomas").value = "";
+
+            crear();
+        }
+
+        function validar() {
+            let number = /[0-9]/;
+            let today = new Date();
+            let fechaCita = new Date(document.getElementById("fecha").value);
+            let horaCita = document.getElementById("time").value;
+            let horaInicio = "08:00";
+            let horaFin = "20:00";
+
+            if (document.getElementById("name").value.trim() === "" || number.test(document.getElementById("name").value)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Por favor, ingrese un nombre válido para la mascota.",
+                });
+            } else if (document.getElementById("propietario").value.trim() === "" || number.test(document.getElementById("propietario").value)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Por favor, ingrese un nombre válido para el propietario.",
+                });
+            } else if (document.getElementById("telefono").value.trim().length < 10) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Por favor, ingrese un número de teléfono válido.",
+                });
+            } else if (document.getElementById("tipo").value === "seleccion") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Por favor, seleccione un tipo de mascota.",
+                });
+            } else if (document.getElementById("fecha").value === "") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Por favor, seleccione una fecha para la cita.",
+                });
+            } else if (fechaCita < today.setHours(0, 0, 0, 0)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "La fecha de la cita no puede ser anterior a la fecha actual.",
+                });
+            } else if (document.getElementById("time").value === "") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Por favor, seleccione una hora para la cita.",
+                });
+            } else if (horaCita < horaInicio || horaCita > horaFin) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "La hora de la cita debe estar entre las 8:00 AM y las 8:00 PM.",
+                });
+            } else if (document.getElementById("sintomas").value.trim() === "") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Por favor, describa los síntomas.",
+                });
+            } else {
+                enviarConsulta()
+                Swal.fire({
+                    icon: "success",
+                    title: "¡Éxito!",
+                    text: "La cita ha sido registrada con éxito.",
+                }); 
+
+            }
+        }
+
+        function crear() {
+            let cardContainer = document.getElementById('card_container');
+            cardContainer.innerHTML = '';
+
+            data.forEach((e, i) => {
+                let card = document.createElement("div");
+                card.classList.add('card');
+
+                let imagen = document.createElement("img");
+                switch (e.tipo.toLowerCase()) {
+                    case "perro":
+                        imagen.src = "https://i.pinimg.com/564x/dd/1d/79/dd1d79a466cca9ad76a81b533add68d6.jpg";
+                        break;
+                    case 'gato':
+                        imagen.src = "https://i.pinimg.com/564x/b7/94/96/b79496b4ab57a58d427055252b8664d7.jpg";
+                        break;
+                    case 'ave':
+                        imagen.src = "https://i.pinimg.com/236x/58/79/64/5879646f4b40e3f05840caadc72dcc30.jpg";
+                        break;
+                    case 'conejo':
+                        imagen.src = "https://i.pinimg.com/564x/35/54/e4/3554e4caf317e77f0290aeb45d5b10d1.jpg";
+                        break;
+                    case 'pez':
+                        imagen.src = "https://i.pinimg.com/564x/31/b1/21/31b12188410c7cfb69f0fa5b4ba44014.jpg";
+                        break;
+                    case 'equino':
+                        imagen.src = "https://i.pinimg.com/564x/b9/ec/af/b9ecafe0e8ecdd607e7dbe74a8e83c19.jpg";
+                        break;
+                    case 'ovino':
+                        imagen.src = "https://i.pinimg.com/564x/ef/50/25/ef5025f8fbfd26400ece1adacbe2ba4f.jpg";
+                        break;
+                    default:
+                        break;
+                }
+                imagen.classList.add('card-img-top');
+                card.appendChild(imagen);
+
+                let cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+
+                let titulo = document.createElement('h3');
+                titulo.textContent = e.nombre;
+                cardBody.appendChild(titulo);
+
+                let propietario = document.createElement('p');
+                propietario.textContent = 'Propietario: ' + e.propietario;
+                cardBody.appendChild(propietario);
+
+                let telefono = document.createElement('p');
+                telefono.textContent = 'Teléfono: ' + e.telefono;
+                cardBody.appendChild(telefono);
+
+                let tipoMascota = document.createElement('p');
+                tipoMascota.textContent = 'Tipo mascota: ' + e.tipo;
+                cardBody.appendChild(tipoMascota);
+
+                let fecha = document.createElement('p');
+                fecha.textContent = 'Fecha: ' + e.fecha;
+                cardBody.appendChild(fecha);
+
+                let hora = document.createElement('p');
+                hora.textContent = 'Hora: ' + e.hora;
+                cardBody.appendChild(hora);
+
+                let sintomas = document.createElement('p');
+                sintomas.textContent = 'Síntomas: ' + e.sintomas;
+                cardBody.appendChild(sintomas);
+
+                let estadoLabel = document.createElement('label');
+                estadoLabel.textContent = 'Estado: ';
+                cardBody.appendChild(estadoLabel);
+
+                let estadoSelect = document.createElement('select');
+                estadoSelect.classList.add('form-select', 'mb-3');
+                estadoSelect.id = 'estado_' + i;
+                estadoSelect.addEventListener('change', function () {
+                    e.estado = this.value;
+                });
+
+                let optionAbierto = document.createElement('option');
+                optionAbierto.value = 'abierto';
+                optionAbierto.textContent = 'Abierto';
+                if (e.estado === 'abierto') optionAbierto.selected = true;
+                estadoSelect.appendChild(optionAbierto);
+
+                let optionTerminada = document.createElement('option');
+                optionTerminada.value = 'terminada';
+                optionTerminada.textContent = 'Terminada';
+                if (e.estado === 'terminada') optionTerminada.selected = true;
+                estadoSelect.appendChild(optionTerminada);
+
+                let optionAnulada = document.createElement('option');
+                optionAnulada.value = 'anulada';
+                optionAnulada.textContent = 'Anulada';
+                if (e.estado === 'anulada') optionAnulada.selected = true;
+                estadoSelect.appendChild(optionAnulada);
+
+                cardBody.appendChild(estadoSelect);
+
+                card.appendChild(cardBody);
+
+                cardContainer.appendChild(card);
+            });
+        }
+
+        function filtrarPorEstado() {
+            let filtro = document.getElementById('filtroEstado').value;
+
+            if (filtro === 'todos') {
+                crear();
+            } else {
+                let citasFiltradas = data.filter(item => item.estado === filtro);
+                mostrarCitasFiltradas(citasFiltradas);
+            }
+        }
+
+        function mostrarCitasFiltradas(citas) {
+            let cardContainer = document.getElementById('card_container');
+            cardContainer.innerHTML = '';
+
+            citas.forEach((e, i) => {
+                let card = document.createElement("div");
+                card.classList.add('card');
+
+                let imagen = document.createElement("img");
+                switch (e.tipo.toLowerCase()) {
+                    case "perro":
+                        imagen.src = "https://i.pinimg.com/564x/dd/1d/79/dd1d79a466cca9ad76a81b533add68d6.jpg";
+                        break;
+                    case 'gato':
+                        imagen.src = "https://i.pinimg.com/564x/b7/94/96/b79496b4ab57a58d427055252b8664d7.jpg";
+                        break;
+                    case 'ave':
+                        imagen.src = "https://i.pinimg.com/236x/58/79/64/5879646f4b40e3f05840caadc72dcc30.jpg";
+                        break;
+                    case 'conejo':
+                        imagen.src = "https://i.pinimg.com/564x/35/54/e4/3554e4caf317e77f0290aeb45d5b10d1.jpg";
+                        break;
+                    case 'pez':
+                        imagen.src = "https://i.pinimg.com/564x/31/b1/21/31b12188410c7cfb69f0fa5b4ba44014.jpg";
+                        break;
+                    case 'equino':
+                        imagen.src = "https://i.pinimg.com/564x/b9/ec/af/b9ecafe0e8ecdd607e7dbe74a8e83c19.jpg";
+                        break;
+                    case 'ovino':
+                        imagen.src = "https://i.pinimg.com/564x/ef/50/25/ef5025f8fbfd26400ece1adacbe2ba4f.jpg";
+                        break;
+                    default:
+                        break;
+                }
+                imagen.classList.add('card-img-top');
+                card.appendChild(imagen);
+
+                let cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+
+                let titulo = document.createElement('h3');
+                titulo.textContent = e.nombre;
+                cardBody.appendChild(titulo);
+
+                let propietario = document.createElement('p');
+                propietario.textContent = 'Propietario: ' + e.propietario;
+                cardBody.appendChild(propietario);
+
+                let telefono = document.createElement('p');
+                telefono.textContent = 'Teléfono: ' + e.telefono;
+                cardBody.appendChild(telefono);
+
+                let tipoMascota = document.createElement('p');
+                tipoMascota.textContent = 'Tipo mascota: ' + e.tipo;
+                cardBody.appendChild(tipoMascota);
+
+                let fecha = document.createElement('p');
+                fecha.textContent = 'Fecha: ' + e.fecha;
+                cardBody.appendChild(fecha);
+
+                let hora = document.createElement('p');
+                hora.textContent = 'Hora: ' + e.hora;
+                cardBody.appendChild(hora);
+
+                let sintomas = document.createElement('p');
+                sintomas.textContent = 'Síntomas: ' + e.sintomas;
+                cardBody.appendChild(sintomas);
+
+                let estadoLabel = document.createElement('label');
+                estadoLabel.textContent = 'Estado: ';
+                cardBody.appendChild(estadoLabel);
+
+                let estadoSelect = document.createElement('select');
+                estadoSelect.classList.add('form-select', 'mb-3');
+                estadoSelect.id = 'estado_' + i;
+                estadoSelect.addEventListener('change', function () {
+                    e.estado = this.value;
+                });
+
+                let optionAbierto = document.createElement('option');
+                optionAbierto.value = 'abierto';
+                optionAbierto.textContent = 'Abierto';
+                if (e.estado === 'abierto') optionAbierto.selected = true;
+                estadoSelect.appendChild(optionAbierto);
+
+                let optionTerminada = document.createElement('option');
+                optionTerminada.value = 'terminada';
+                optionTerminada.textContent = 'Terminada';
+                if (e.estado === 'terminada') optionTerminada.selected = true;
+                estadoSelect.appendChild(optionTerminada);
+
+                let optionAnulada = document.createElement('option');
+                optionAnulada.value = 'anulada';
+                optionAnulada.textContent = 'Anulada';
+                if (e.estado === 'anulada') optionAnulada.selected = true;
+                estadoSelect.appendChild(optionAnulada);
+
+                cardBody.appendChild(estadoSelect);
+
+                card.appendChild(cardBody);
+
+                cardContainer.appendChild(card);
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        
+        crossorigin="anonymous"></script>
+
+</body>
+<style>
+     body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #b983aa;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.part1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.part1 .logo {
+    
+    color: #d6c6e0;
+ 
+}
+#icono{
+  font-size: 80px;
+}
+
+.part1 ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.part1 ul li {
+    margin-left: 20px;
+}
+
+.part1 ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+
+}
+
+.hero {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: #f5f5f5;
+    height: 400px;
+}
+
+.hero .overlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-content {
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-content h1 {
+
+   font-size: clamp(11px, 4vw + 1rem, 48px);
+    font-weight: 600;
+   
+}
+
+.hero-content p {
+    font-size: 18px;
+    color: black;
+}
+
+
+ .hero-image {
+    position: relative;
+    z-index: 1;
+    width: 50%;
+    height: 400px;
+    object-fit: cover;
+    opacity: 0.2;
+    background-size: cover;
+    background-color: #f5f5f5;
+}
+.modal-body{
+    background-image: url("https://i.pinimg.com/564x/92/7b/d0/927bd0aa9ffe281c7590d37fac9b7f33.jpg") ;
+   
+}
+button {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 25px 20px 22px;
+  box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  background-color: #e8e8e8;
+  border-color: #ffe2e2;
+  border-style: solid;
+  border-width: 9px;
+  border-radius: 35px;
+  cursor: pointer;
+  font-weight: 900;
+  color: rgb(134, 124, 124);
+  font-family: monospace;
+  transition: transform 400ms cubic-bezier(0.68, -0.55, 0.27, 2.5),
+    border-color 400ms ease-in-out, background-color 400ms ease-in-out;
+  word-spacing: -2px;
+}
+#guardar{
+    background-color: #b983aa;
+    box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+@keyframes movingBorders {
+  0% {
+    border-color: #fce4e4;
+  }
+
+  50% {
+    border-color: #ffd8d8;
+  }
+
+  90% {
+    border-color: #fce4e4;
+  }
+}
+#registrar{
+    background-color: rgb(54, 138, 186);
+    font-size: 20px;
+    padding: 15px 20px;
+}
+
+button:hover {
+  background-color: #eee;
+  transform: scale(105%);
+  animation: movingBorders 3s infinite;
+}
+
+button svg {
+  margin-right: 11px;
+  fill: rgb(255, 110, 110);
+  transition: opacity 100ms ease-in-out;
+}
+
+.filled {
+  position: absolute;
+  opacity: 0;
+  top: 20px;
+  left: 22px;
+}
+
+@keyframes beatingHeart {
+  0% {
+    transform: scale(1);
+  }
+
+  15% {
+    transform: scale(1.15);
+  }
+
+  30% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.15);
+  }
+
+  60% {
+    transform: scale(1);
+  }
+}
+
+button:hover .empty {
+  opacity: 0;
+}
+
+button:hover .filled {
+  opacity: 1;
+  animation: beatingHeart 1.2s infinite;
+}
+
+.hero{
+    position: relative;
+    
+    background: url('https://i.pinimg.com/564x/82/81/5e/82815eebd179e28d9547757b387ebdf7.jpg') no-repeat center center/cover;
+}
+
+.filtro{
+    position: relative;
+    z-index: 10;
+    margin-top: 20px;
+} 
+.filtro label{
+    font-size: 20px;
+}
+
+#filtroEstado{
+    padding: 5px;
+    border-radius: 3px;
+   
+}
+input {
+    text-align: center;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+.part2 h1{
+    text-align: center;
+    font-weight: 600;
+    margin-top: 20px;
+}
+#card_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        width: 300px;
+        background-color: #f0f0f0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .card p {
+        text-align: start;
+        font-size: medium;
+    }
+
+    .card-body label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .card-body select {
+        width: 100%;
+    }
+
+    .modal-body label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .modal-body input,
+    .modal-body select,
+    .modal-body textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+
+</html>
